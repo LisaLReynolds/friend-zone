@@ -1,20 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Home</title>
-  <link rel="stylesheet" href="/css/styles.css">
-</head>
-<body>
-  {{> header}}
-  <main>
-    <h1>Welcome to Friend Zone</h1>
-    <div class="posts">
-      {{#each posts}}
-        {{> post}}
-      {{/each}}
-    </div>
-  </main>
-  {{> footer}}
-</body>
-</html>
+{{!-- This file will be rendered within the {{{body}}} of main.handlebars --}}
+<h1>Welcome to Friend Zone</h1>
+<div class="posts">
+  {{#each posts}}
+    {{> post}}
+  {{/each}}
+</div>

@@ -1,5 +1,5 @@
 const express = require("express");
-const exphbs = require("express-handlebars");
+const { engine } = require("express-handlebars");
 const bodyParser = require("body-parser");
 const path = require("path");
 const session = require("express-session");
@@ -18,7 +18,7 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, "public")));
 
 // Handlebars setup
-app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.engine("handlebars", engine({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
 // Session setup
@@ -30,7 +30,7 @@ app.use(
   })
 );
 
-// Routes
+// Use routes
 app.use(routes);
 
 // Sync database and start server
