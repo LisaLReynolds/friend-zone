@@ -1,9 +1,10 @@
-{{!-- This file will be rendered within the {{{body}}} of main.handlebars --}}
 <h1>{{user.username}}'s Profile</h1>
 <p>Email: {{user.email}}</p>
-<div class="posts">
-  <h2>Your Posts</h2>
+<div class="row">
+  <h2 class="col-12">Your Posts</h2>
   {{#each user.posts}}
-    {{> post}}
+    <div class="col-md-6 mb-4">
+      {{> post}}
+    </div>
   {{/each}}
 </div>
