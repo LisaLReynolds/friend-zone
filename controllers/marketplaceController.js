@@ -1,24 +1,27 @@
 const db = require("../models");
 
-exports.createListing = async (req, res) => {
+exports.createItem = async (req, res) => {
   try {
-    const { content, image, price } = req.body;
-    const listing = await db.Marketplace.create({
+    const { content, price } = req.body;
+    const image = req.file ? req.file.filename : null;
+    const item = await db.Marketplace.create({
       content,
       image,
       price,
-      UserId: req.user.id,
+      userId: req.user.id,
     });
-    res.status(201).json(listing);
+    res.redirect("/marketplace");
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 };
 
-exports.getListings = async (req, res) => {
+exports.getMarketplaces = async (req, res) => {
   try {
-    const listings = await db.Marketplace.findAll({ include: [db.User] });
-    res.json(listings);
+    const marketplaces = await db.Marketplace.findAll({
+      include: [db.User],
+    });
+    res.render("marketplace", { title: "Marketplace", items: marketplaces });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

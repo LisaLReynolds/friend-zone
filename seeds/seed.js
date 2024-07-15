@@ -1,9 +1,7 @@
-const sequelize = require("../config/connection");
-const bcrypt = require("bcryptjs");
 const db = require("../models");
 
 const seedDatabase = async () => {
-  await sequelize.sync({ force: true });
+  await db.sequelize.sync({ force: true });
 
   // Seed Users
   const users = await db.User.bulkCreate(
@@ -90,15 +88,15 @@ const seedDatabase = async () => {
     }
   );
 
-  // Seed Posts
-  const posts = await db.Post.bulkCreate([
+  const marketplaces = await db.Marketplace.bulkCreate([
     {
-      content: "This is my first post!",
+      content: "Item 1",
       image: "image1.jpg",
-      user_id: users[0].id,
+      price: 10.0,
+      userId: users[0].id,
     },
     {
-      content: "Hello world!",
+      content: "Item 2",
       image: "image2.jpg",
       user_id: users[1].id,
     },
