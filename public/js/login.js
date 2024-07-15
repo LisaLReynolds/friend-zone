@@ -1,29 +1,31 @@
-document
-  .getElementById("loginForm")
-  .addEventListener("submit", async (event) => {
-    event.preventDefault();
+document.addEventListener("DOMContentLoaded", () => {
+  const loginForm = document.getElementById("loginForm");
 
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
+  if (loginForm) {
+    loginForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
 
-    try {
-      const response = await fetch("/api/users/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-      });
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
 
-      const data = await response.json();
+      try {
+        const response = await fetch("/api/users/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email, password }),
+        });
 
-      if (response.ok) {
-        localStorage.setItem("token", data.token);
-        window.location.href = "/";
-      } else {
-        alert(data.error);
+        if (response.ok) {
+          window.location.href = "/";
+        } else {
+          const data = await response.json();
+          alert(data.error || "Login failed");
+        }
+      } catch (error) {
+        console.error("Error:", error);
       }
-    } catch (error) {
-      console.error("Error:", error);
-    }
-  });
+    });
+  }
+});

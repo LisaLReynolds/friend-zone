@@ -1,29 +1,26 @@
 const express = require("express");
 const router = express.Router();
+const auth = require("../middleware/auth");
+const postController = require("../controllers/postController");
+const marketplaceController = require("../controllers/marketplaceController");
 
 // Define the root route
-router.get("/", (req, res) => {
-  res.render("home", { title: "Home" });
-});
+router.get("/", postController.getPosts);
 
-// Define the login route
+// Define the marketplace route
+router.get("/marketplace", marketplaceController.getMarketplaces);
+
+// Define other routes
 router.get("/login", (req, res) => {
   res.render("login", { title: "Login" });
 });
 
-// Define the register route
 router.get("/register", (req, res) => {
   res.render("register", { title: "Register" });
 });
 
-// Define the profile route
-router.get("/profile", (req, res) => {
-  res.render("profile", { title: "Profile" });
-});
-
-// Define the marketplace route
-router.get("/marketplace", (req, res) => {
-  res.render("marketplace", { title: "Marketplace" });
+router.get("/profile", auth, (req, res) => {
+  res.render("profile", { title: "Profile", user: req.user });
 });
 
 // Include API routes
