@@ -1,0 +1,16 @@
+<header>
+  <nav>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/profile">Profile</a></li>
+      <li><a href="/marketplace">Marketplace</a></li>
+      {{#if user}}
+        <li><button id="logoutButton">Logout</button></li>
+      {{else}}
+        <li><a href="/login">Login</a></li>
+        <li><a href="/register">Register</a></li>
+      {{/if}}
+    </ul>
+  </nav>
+</header>
+<script src="/js/logout.js"></script>
