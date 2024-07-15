@@ -1,87 +1,28 @@
-const sequelize = require("../config/connection");
-const bcrypt = require("bcryptjs");
 const db = require("../models");
 
 const seedDatabase = async () => {
-  await sequelize.sync({ force: true });
+  await db.sequelize.sync({ force: true });
 
-  // Seed Users
-  const users = await db.User.bulkCreate(
-    [
-      {
-        username: "john_doe",
-        email: "john@example.com",
-        password: await bcrypt.hash("password123", 10),
-      },
-      {
-        username: "jane_doe",
-        email: "jane@example.com",
-        password: await bcrypt.hash("password123", 10),
-      },
-    ],
-    {
-      individualHooks: true,
-      returning: true,
-    }
-  );
+  const users = await db.User.bulkCreate([
+    { username: "user1", email: "user1@example.com", password: "password1" },
+    { username: "user2", email: "user2@example.com", password: "password2" },
+  ]);
 
-  // Seed Posts
-  const posts = await db.Post.bulkCreate([
+  const marketplaces = await db.Marketplace.bulkCreate([
     {
-      content: "This is my first post!",
+      content: "Item 1",
       image: "image1.jpg",
-      user_id: users[0].id,
+      price: 10.0,
+      userId: users[0].id,
     },
     {
-      content: "Hello world!",
+      content: "Item 2",
       image: "image2.jpg",
-      user_id: users[1].id,
+      price: 20.0,
+      userId: users[1].id,
     },
   ]);
 
-  // Seed Comments
-  const comments = await db.Comment.bulkCreate([
-    {
-      content: "Nice post!",
-      user_id: users[1].id,
-      post_id: posts[0].id,
-    },
-    {
-      content: "Thanks for sharing!",
-      user_id: users[0].id,
-      post_id: posts[1].id,
-    },
-  ]);
-
-  // Seed Likes
-  const likes = await db.Like.bulkCreate([
-    {
-      user_id: users[0].id,
-      post_id: posts[1].id,
-    },
-    {
-      user_id: users[1].id,
-      post_id: posts[0].id,
-    },
-  ]);
-
-  // Seed Marketplace Items
-  const marketplaceItems = await db.Marketplace.bulkCreate([
-    {
-      content: "Selling a bicycle",
-      image: "bicycle.jpg",
-      price: 100.0,
-      user_id: users[0].id,
-    },
-    {
-      content: "Selling a laptop",
-      image: "laptop.jpg",
-      price: 500.0,
-      user_id: users[1].id,
-    },
-  ]);
-
-  console.log("Database seeded!");
   process.exit(0);
 };
 

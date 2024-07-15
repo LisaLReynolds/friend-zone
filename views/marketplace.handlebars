@@ -1,23 +1,23 @@
-{{!-- This file will be rendered within the {{{body}}} of main.handlebars --}}
-<h1>Marketplace</h1>
-<div class="marketplace-items">
-  {{#each items}}
-    <div class="marketplace-item">
-      <h2>{{content}}</h2>
-      {{#if image}}
-        <img src="{{image}}" alt="Item image" />
-      {{/if}}
-      <p>Price: ${{price}}</p>
-      <p>Posted by: {{User.username}}</p>
-    </div>
-  {{/each}}
+<div class="container mt-5">
+  <h1 class="mb-4 text-center">Marketplace</h1>
+  <div class="row">
+    {{#each items}}
+      <div class="col-md-6 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">{{this.content}}</h5>
+            {{#if this.image}}
+              <img
+                src="/uploads/{{this.image}}"
+                class="card-img-top"
+                alt="Item image"
+              />
+            {{/if}}
+            <p class="card-text">Price: ${{this.price}}</p>
+            <p class="card-text">Posted by: {{this.User.username}}</p>
+          </div>
+        </div>
+      </div>
+    {{/each}}
+  </div>
 </div>
-<form id="marketplaceForm">
-  <label for="content">Item Description:</label>
-  <textarea id="content" name="content" required></textarea>
-  <label for="image">Image URL:</label>
-  <input type="text" id="image" name="image" />
-  <label for="price">Price:</label>
-  <input type="number" id="price" name="price" required />
-  <button type="submit">Add Item</button>
-</form>

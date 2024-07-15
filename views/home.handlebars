@@ -1,7 +1,68 @@
-{{!-- This file will be rendered within the {{{body}}} of main.handlebars --}}
-<h1>Welcome to Friend Zone</h1>
-<div class="posts">
-  {{#each posts}}
-    {{> post}}
-  {{/each}}
+<div class="container mt-5">
+  <h1 class="mb-4 text-center">Welcome to Friend Zone</h1>
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card mb-4">
+        <div class="card-body">
+          <form
+            id="postForm"
+            method="POST"
+            action="/api/posts"
+            enctype="multipart/form-data"
+          >
+            <div class="form-group">
+              <label for="content">Post Description:</label>
+              <textarea
+                id="content"
+                name="content"
+                class="form-control"
+                required
+              ></textarea>
+            </div>
+            <div class="form-group">
+              <label for="image">Image:</label>
+              <input
+                type="file"
+                id="image"
+                name="image"
+                class="form-control-file"
+              />
+            </div>
+            <button
+              type="submit"
+              class="btn btn-primary btn-block"
+            >Post</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    {{#each posts}}
+      <div class="col-md-6 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <p class="card-text">{{this.content}}</p>
+            {{#if this.image}}
+              <img
+                src="/uploads/{{this.image}}"
+                class="card-img-top"
+                alt="Post image"
+              />
+            {{/if}}
+            <p class="card-text">Posted by: {{this.User.username}}</p>
+            <p class="card-text">Likes: {{this.Likes.length}}</p>
+            <div class="comments">
+              {{#each this.Comments}}
+                <div class="comment">
+                  <p>{{this.content}} - {{this.User.username}}</p>
+                </div>
+              {{/each}}
+            </div>
+          </div>
+        </div>
+      </div>
+    {{/each}}
+  </div>
 </div>
