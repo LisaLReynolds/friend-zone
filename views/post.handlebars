@@ -1,0 +1,8 @@
+{{!-- This file will be rendered within the {{{body}}} of main.handlebars --}}
+<form id="postForm">
+  <label for="content">Content:</label>
+  <textarea id="content" name="content" required>{{post.content}}</textarea>
+  <label for="image">Image URL:</label>
+  <input type="text" id="image" name="image" value="{{post.image}}" />
+  <button type="submit">Save Post</button>
+</form>

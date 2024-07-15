@@ -1,0 +1,15 @@
+<div class="post">
+  <p>{{content}}</p>
+  {{#if image}}
+    <img src="{{image}}" alt="Post image" />
+  {{/if}}
+  <p>Posted by: {{User.username}}</p>
+  <p>Likes: {{Likes.length}}</p>
+  <div class="comments">
+    {{#each Comments}}
+      <div class="comment">
+        <p>{{content}} - {{User.username}}</p>
+      </div>
+    {{/each}}
+  </div>
+</div>

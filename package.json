@@ -1,0 +1,29 @@
+{
+  "name": "friend_zone",
+  "version": "1.0.0",
+  "description": "A social media application similar to Facebook",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server.js",
+    "seed": "node seeds/seeds.js"
+  },
+  "keywords": [],
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-handlebars": "^7.0.7",
+    "express-session": "^1.17.3",
+    "jsonwebtoken": "^8.5.1",
+    "path": "^0.12.7",
+    "pg": "^8.8.0",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.29.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
