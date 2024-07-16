@@ -52,14 +52,6 @@
               />
             {{/if}}
             <p class="card-text">Posted by: {{this.User.username}}</p>
-            <p class="card-text">Likes: {{this.Likes.length}}</p>
-            <div class="comments">
-              {{#each this.Comments}}
-                <div class="comment">
-                  <p>{{this.content}} - {{this.User.username}}</p>
-                </div>
-              {{/each}}
-            </div>
           </div>
         </div>
       </div>

@@ -1,27 +1,23 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const loginForm = document.getElementById("loginForm");
+  const postForm = document.getElementById("postForm");
 
-  if (loginForm) {
-    loginForm.addEventListener("submit", async (event) => {
+  if (postForm) {
+    postForm.addEventListener("submit", async (event) => {
       event.preventDefault();
 
-      const email = document.getElementById("email").value;
-      const password = document.getElementById("password").value;
+      const formData = new FormData(postForm);
 
       try {
-        const response = await fetch("/api/users/login", {
+        const response = await fetch("/api/posts", {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ email, password }),
+          body: formData,
         });
 
         if (response.ok) {
           window.location.href = "/";
         } else {
           const data = await response.json();
-          alert(data.error || "Login failed");
+          alert(data.error || "Post creation failed");
         }
       } catch (error) {
         console.error("Error:", error);

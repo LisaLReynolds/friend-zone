@@ -16,7 +16,7 @@ exports.register = async (req, res) => {
       expiresIn: "1h",
     });
     res.cookie("token", token, { httpOnly: true });
-    res.redirect("/");
+    res.status(201).json({ message: "User registered successfully", user });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
