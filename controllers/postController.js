@@ -4,10 +4,11 @@ exports.createPost = async (req, res) => {
   try {
     const { content } = req.body;
     const image = req.file ? req.file.filename : null;
+    console.log("User ID:", req.user.id); // Debug statement
     const post = await db.Post.create({
       content,
       image,
-      userId: req.user.id,
+      user_id: req.user.id, // Ensure user_id is correctly set
     });
     res.redirect("/");
   } catch (error) {

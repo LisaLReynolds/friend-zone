@@ -16,6 +16,7 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage: storage });
 
+// Ensure auth middleware is applied here
 router.post("/", auth, upload.single("image"), postController.createPost);
 
 module.exports = router;
