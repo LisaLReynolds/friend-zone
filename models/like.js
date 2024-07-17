@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
           key: "id",
         },
       },
-      post_id: {
+      PostId: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {

@@ -23,8 +23,8 @@ db.Comment.belongsTo(db.Post, { foreignKey: "post_id" });
 db.User.hasMany(db.Like, { foreignKey: "user_id" });
 db.Like.belongsTo(db.User, { foreignKey: "user_id" });
 
-db.Post.hasMany(db.Like, { foreignKey: "post_id" });
-db.Like.belongsTo(db.Post, { foreignKey: "post_id" });
+db.Post.hasMany(db.Like, { foreignKey: "PostId" });
+db.Like.belongsTo(db.Post, { foreignKey: "PostId" });
 
 db.User.hasMany(db.Marketplace, { foreignKey: "user_id" });
 db.Marketplace.belongsTo(db.User, { foreignKey: "user_id" });
