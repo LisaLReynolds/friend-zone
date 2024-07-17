@@ -7,10 +7,93 @@
             goods locally.
           </p>
           <p>
-            <a href="#" class="btn btn-primary my-2">List an item</a>
+           {{!-- MODAL BUTTON --}}
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+            >
+              List an item
+            </button>
           </p>
         </div>
       </div>
+      <!-- MODAL -->
+      <div
+        class="modal fade"
+        id="exampleModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">
+                List an item
+              </h1>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <form
+                id="marketplaceForm"
+                method="POST"
+                action="/api/marketplace"
+                enctype="multipart/form-data"
+              >
+                <div class="form-group">
+                  <label for="content">Item Description:</label>
+                  <textarea
+                    id="content"
+                    name="content"
+                    class="form-control"
+                    required
+                  ></textarea>
+                </div>
+                <div class="form-group">
+                  <label for="price">Price:</label>
+                  <input
+                    type="number"
+                    id="price"
+                    name="price"
+                    class="form-control"
+                    required
+                  />
+                </div>
+                <div class="form-group p-3">
+                  <label for="image p-3">Image: </label>
+                  <input
+                    type="file"
+                    id="image"
+                    name="image"
+                    class="form-control-file"
+                  />
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+              <button type="submit" class="btn btn-primary btn-block">
+                Post Item
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- END MODAL -->
     </section>
     <div class="album py-5 bg-body-tertiary">
       <div class="container">
