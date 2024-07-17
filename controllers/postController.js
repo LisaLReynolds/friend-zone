@@ -1,5 +1,16 @@
 const db = require("../models");
 
+exports.getPosts = async (req, res) => {
+  try {
+    const posts = await db.Post.findAll({
+      include: [db.User],
+    });
+    res.render("home", { title: "Home", posts });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
 exports.createPost = async (req, res) => {
   try {
     const { content } = req.body;
@@ -12,17 +23,6 @@ exports.createPost = async (req, res) => {
     });
 
     res.redirect("/");
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-};
-
-exports.getPosts = async (req, res) => {
-  try {
-    const posts = await db.Post.findAll({
-      include: [db.User],
-    });
-    res.render("home", { title: "Home", posts });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

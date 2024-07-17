@@ -17,7 +17,7 @@ const PORT = process.env.PORT || 3000;
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, "public"))); // This line serves static files
+app.use(express.static(path.join(__dirname, "public"))); // Serve static files
 
 // Handlebars setup
 app.engine(
