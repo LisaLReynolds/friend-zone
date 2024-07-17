@@ -16,7 +16,7 @@ module.exports = async (req, res, next) => {
       return res.status(401).redirect("/login");
     }
 
-    req.user = user; // Ensure req.user is being set correctly
+    req.user = user;
     next();
   } catch (err) {
     res.status(401).redirect("/login");
