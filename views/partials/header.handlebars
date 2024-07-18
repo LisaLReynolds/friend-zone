@@ -1,15 +1,25 @@
-<header>
-  <nav>
-    <ul>
-      <li><a href="/">Home</a></li>
-      <li><a href="/profile">Profile</a></li>
-      <li><a href="/marketplace">Marketplace</a></li>
-      {{#if user}}
-        <li><button id="logoutButton">Logout</button></li>
-      {{else}}
-        <li><a href="/login">Login</a></li>
-      {{/if}}
+<div class="container">
+  <header
+    class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom"
+  >
+    <h1 class="col-md-3 mb-2 mb-md-0">fz</h1>
+
+    <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+      <li><a href="#" class="nav-link px-2 link-secondary">Home</a></li>
+      <li><a href="#" class="nav-link px-2">Profile</a></li>
+      <li><a href="#" class="nav-link px-2">Marketplace</a></li>
     </ul>
-  </nav>
-</header>
-<script src="/js/logout.js"></script>
+
+    <div class="col-md-3 text-end">
+      {{#if user}}
+        <button id="logoutButton">Logout</button>
+      {{else}}
+        <button type="button" class="btn btn-outline-primary me-2">
+
+          Login
+        </button>
+      {{/if}}
+    </div>
+  </header>
+  <script src="/js/logout.js"></script>
+</div>

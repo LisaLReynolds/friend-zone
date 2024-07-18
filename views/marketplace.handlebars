@@ -1,69 +1,146 @@
-<div class="container mt-5">
-  <h1 class="mb-4 text-center">Marketplace</h1>
-
-  <div class="row justify-content-center">
-    <div class="col-md-8">
-      <div class="card mb-4">
-        <div class="card-body">
-          <form
-            id="marketplaceForm"
-            method="POST"
-            action="/api/marketplace"
-            enctype="multipart/form-data"
-          >
-            <div class="form-group">
-              <label for="content">Item Description:</label>
-              <textarea
-                id="content"
-                name="content"
-                class="form-control"
-                required
-              ></textarea>
-            </div>
-            <div class="form-group">
-              <label for="price">Price:</label>
-              <input
-                type="number"
-                id="price"
-                name="price"
-                class="form-control"
-                required
-              />
-            </div>
-            <div class="form-group">
-              <label for="image">Image:</label>
-              <input
-                type="file"
-                id="image"
-                name="image"
-                class="form-control-file"
-              />
-            </div>
-            <button type="submit" class="btn btn-primary btn-block">Post Item</button>
-          </form>
+    <section class="py-5 text-center container">
+      <div class="row py-lg-5">
+        <div class="col-lg-6 col-md-8 mx-auto">
+          <h1 class="fw-light">Marketplace</h1>
+          <p class="lead text-body-secondary">
+            Friend Zone's marketplace makes it easier than ever to buy and sell
+            goods locally.
+          </p>
+          <p>
+           {{!-- MODAL BUTTON --}}
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+            >
+              List an item
+            </button>
+          </p>
         </div>
+      </div>
+      <!-- MODAL -->
+      <div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">
+          List an item
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form
+          id="marketplaceForm"
+          method="POST"
+          action="/api/marketplace"
+          enctype="multipart/form-data"
+        >
+          <div class="form-group">
+            <label for="content">Item Description:</label>
+            <textarea
+              id="content"
+              name="content"
+              class="form-control"
+              required
+            ></textarea>
+          </div>
+          <div class="form-group">
+            <label for="price">Price:</label>
+            <input
+              type="number"
+              id="price"
+              name="price"
+              class="form-control"
+              required
+            />
+          </div>
+          <div class="form-group p-3">
+            <label for="image p-3">Image: </label>
+            <input
+              type="file"
+              id="image"
+              name="image"
+              class="form-control-file"
+            />
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button type="submit" class="btn btn-primary btn-block">
+              Post Item
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
+</div>
 
-  <div class="row">
-    {{#each items}}
-      <div class="col-md-6 mb-4">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">{{this.content}}</h5>
+      <!-- END MODAL -->
+    </section>
+    <div class="album py-5 bg-body-tertiary">
+      <div class="container">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+         {{#each items}}
+          <div class="col">
+            <div class="card shadow-sm">
             {{#if this.image}}
               <img
                 src="/uploads/{{this.image}}"
                 class="card-img-top"
                 alt="Item image"
               />
-            {{/if}}
-            <p class="card-text">Price: ${{this.price}}</p>
-            <p class="card-text">Posted by: {{this.User.username}}</p>
+              {{else}}
+              <svg
+                class="bd-placeholder-img card-img-top"
+                width="100%"
+                height="225"
+                xmlns="http://www.w3.org/2000/svg"
+                role="img"
+                aria-label="Placeholder: Thumbnail"
+                preserveAspectRatio="xMidYMid slice"
+                focusable="false"
+              >
+                <title>Placeholder</title>
+                <rect width="100%" height="100%" fill="#55595c" />
+                <text x="30%" y="50%" fill="#eceeef" dy=".3em">
+                  No image available
+                </text>
+              </svg>
+              {{/if}}
+              <div class="card-body">
+                <p class="card-text">{{this.content}}</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    <button
+                      type="button"
+                      class="btn btn-sm btn-outline-secondary"
+                    >
+                      Email Seller
+                    </button>
+                  </div>
+                  <small class="text-body-secondary">${{this.price}}</small>
+                </div>
+              </div>
+            </div>
+             {{/each}}
           </div>
         </div>
-      </div>
-    {{/each}}
-  </div>
-</div>
+    </div>
